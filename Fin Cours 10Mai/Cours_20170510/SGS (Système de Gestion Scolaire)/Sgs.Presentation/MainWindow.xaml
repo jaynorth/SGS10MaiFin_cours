@@ -40,7 +40,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <!--Zone Etudiants list View-->
+            <!--Zone Enseignants list View-->
             <Border Grid.Column="0" Width="170"  Style="{StaticResource MainBorderStyle}">
                 <ContentControl>
                     <views:EnseignantListView x:Name="EnseignantsList" >
@@ -50,10 +50,10 @@
                 </ContentControl>
             </Border>
 
-            <!--Zone Details Etudiant-->
+            <!--Zone Details Enseignant-->
             <Border Grid.Column="2" BorderBrush="Black" BorderThickness="1" Padding="10" Style="{StaticResource MainBorderStyle}">
                 <ContentControl>
-                    <views:EtudiantDetailView x:Name="EtudiantDetail"></views:EtudiantDetailView>
+                    <views:EnseignantDetailView x:Name="EnseignantDetail"></views:EnseignantDetailView>
                 </ContentControl>
             </Border>
         </Grid>

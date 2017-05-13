@@ -26,7 +26,7 @@ namespace Sgs.Presentation
         {
             InitializeComponent();
             DataContext = new EnseignantListViewModel();
-           // EtudiantDetail.DataContext = EtudiantsList.ListViewEtudiants; //extrait du Datacontext principal
+           //EnseignantDetail.DataContext = EnseignantsList.DataContext; //extrait du Datacontext principal
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)

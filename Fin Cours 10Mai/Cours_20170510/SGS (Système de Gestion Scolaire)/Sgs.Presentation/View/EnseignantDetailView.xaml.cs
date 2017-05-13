@@ -16,14 +16,13 @@ using System.Windows.Shapes;
 namespace Sgs.Presentation.View
 {
     /// <summary>
-    /// Logique d'interaction pour EtudiantDetailView.xaml
+    /// Logique d'interaction pour EnseignantDetailView.xaml
     /// </summary>
-    public partial class EtudiantDetailView : UserControl
+    public partial class EnseignantDetailView : UserControl
     {
-        public EtudiantDetailView()
+        public EnseignantDetailView()
         {
             InitializeComponent();
-            
         }
     }
 }

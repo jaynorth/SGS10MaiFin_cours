@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Sgs.Presentation.ViewModel
 {
@@ -23,21 +24,21 @@ namespace Sgs.Presentation.ViewModel
             }
         }
 
-        //public ICommand AddNew { get { return new ExecutableCommand(_addNew); } }
-        //
-        //public ICommand DeleteCurrent { get { return new ExecutableCommand(_deleteCurrent); } }
+        public ICommand AddNew { get { return new ExecutableCommand(_addNew); } }
 
-        //private void _addNew()
-        //{
-        //    tbEtudiants newItem = new tbEtudiants("Duss", "Jean");
-        //    Etudiants.Add(newItem);
-        //    CurrentItem = newItem;
-        //}
+        public ICommand DeleteCurrent { get { return new ExecutableCommand(_deleteCurrent); } }
+
+        private void _addNew()
+        {
+            tbEnseignants newItem = new tbEnseignants("Duss", "Jean");
+            Enseignants.Add(newItem);
+            CurrentItem = newItem;
+        }
 
 
-        private tbEtudiants _currentItem;
+        private tbEnseignants _currentItem;
 
-        public tbEtudiants CurrentItem
+        public tbEnseignants CurrentItem
         {
             get { return _currentItem; }
 
@@ -49,11 +50,11 @@ namespace Sgs.Presentation.ViewModel
 
         }
 
-        //public void _deleteCurrent()
-        //{
-        //    Etudiants.Remove(CurrentItem);
-        //    FirePropertyChanged();
-        //}
+        public void _deleteCurrent()
+        {
+            Enseignants.Remove(CurrentItem);
+            FirePropertyChanged();
+        }
 
         public EnseignantListViewModel()
         {
@@ -62,8 +63,6 @@ namespace Sgs.Presentation.ViewModel
 
             _enseignants = new ObservableCollection<tbEnseignants>(context.tbEnseignants);
 
-            //foreach (tbEtudiants etudiant in context.tbEtudiants.ToList<tbEtudiants>()) 
-            //    _etudiants.Add(etudiant);
         }
 
     
