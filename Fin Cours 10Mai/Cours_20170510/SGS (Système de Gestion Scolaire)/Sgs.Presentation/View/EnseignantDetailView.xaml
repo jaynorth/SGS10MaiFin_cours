@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Sgs.Presentation.View"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+    <Grid ShowGridLines="False">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width=".2*" />
@@ -15,6 +15,8 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -46,26 +48,50 @@
             Target="{Binding ElementName=PrenomEnseignant}" />
 
         <TextBox
-            x:Name="PrenomEtudiant"
+            x:Name="PrenomEnseignant"
             Grid.Row="3" Grid.ColumnSpan="5" Text="{Binding CurrentItem.Prenom,  Mode=TwoWay}">
+
+        </TextBox>
+        
+        <!-- Titre-->
+        <Label
+            Grid.Row="4" Grid.Column="0" 
+            Content="Titre" 
+            HorizontalAlignment="Left"
+            Target="{Binding ElementName=TitreEnseignant}" />
+
+        <TextBox
+            x:Name="TitreEnseignant"
+            Grid.Row="4" Grid.Column="2"  Text="{Binding CurrentItem.Titre,  Mode=TwoWay}">
+
+        </TextBox>
+        <!-- Bio-->
+        <Label
+            Grid.Row="5" 
+            Content="Bio" 
+            HorizontalAlignment="Left"
+            Target="{Binding ElementName=BioEnseignant}" />
+        <TextBox
+            x:Name="BioEnseignant"
+            Grid.Row="5" Grid.Column="2" Text="{Binding CurrentItem.Bio,  Mode=TwoWay}">
 
         </TextBox>
 
         <!-- Adresse -->
         <Label
-            Grid.Row="4" Grid.Column="0" 
+            Grid.Row="6" Grid.Column="0" 
             Content="Adresse:" 
             HorizontalAlignment="Left"
             Target="{Binding ElementName=Rue}" />
 
         <TextBox
             x:Name="Rue"
-            Grid.Row="5" Grid.ColumnSpan="3"  Text="{Binding CurrentItem.Rue,  Mode=TwoWay}" ></TextBox>
+            Grid.Row="7" Grid.ColumnSpan="3"  Text="{Binding CurrentItem.Rue,  Mode=TwoWay}" ></TextBox>
 
 
         <TextBox
             x:Name="No"
-            Grid.Row="5" Grid.Column="4">
+            Grid.Row="7" Grid.Column="4">
             <TextBox.Text>
                 <Binding Path="CurrentItem.RueNum"
                          Mode="TwoWay">
@@ -74,11 +100,11 @@
         </TextBox>
 
         <!-- Separateur -->
-        <Label Grid.Row="6" Height="4"/>
+        <Label Grid.Row="8" Height="4"/>
 
         <TextBox
             x:Name="Npa"
-            Grid.Row="7" Grid.Column="0">
+            Grid.Row="8" Grid.Column="0">
             <TextBox.Text>
                 <Binding Path="CurrentItem.Npa" 
                          Mode="TwoWay">
@@ -87,7 +113,7 @@
         </TextBox>
         <TextBox
             x:Name="Localite"
-            Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="3">
+            Grid.Row="8" Grid.Column="2" Grid.ColumnSpan="3">
             <TextBox.Text>
                 <Binding Path="CurrentItem.Localite" 
                          Mode="TwoWay">
