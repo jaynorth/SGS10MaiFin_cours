@@ -1,0 +1,98 @@
+﻿<UserControl x:Class="Sgs.Presentation.View.EtudiantDetailView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Sgs.Presentation.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width=".2*" />
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width=".2*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Nom Etudiant-->
+        <Label
+            Grid.Row="0" Grid.Column="0" 
+            Content="Nom:" 
+            HorizontalAlignment="Left"
+            Target="{Binding ElementName=NomEtudiant}" />
+
+        <TextBox
+            x:Name="NomEtudiant"
+            Grid.Row="1" Grid.ColumnSpan="5" Text="{Binding CurrentItem.Nom,  Mode=TwoWay}">
+            
+        </TextBox>
+
+        <!-- Prenom Etudiant-->
+        <Label
+            Grid.Row="2" Grid.Column="0" 
+            Content="Prenom:" 
+            HorizontalAlignment="Left"
+            Target="{Binding ElementName=PrenomEtudiant}" />
+
+        <TextBox
+            x:Name="PrenomEtudiant"
+            Grid.Row="3" Grid.ColumnSpan="5" Text="{Binding CurrentItem.Prenom,  Mode=TwoWay}">
+            
+        </TextBox>
+        
+        <!-- Adresse -->
+        <Label
+            Grid.Row="4" Grid.Column="0" 
+            Content="Adresse:" 
+            HorizontalAlignment="Left"
+            Target="{Binding ElementName=Rue}" />
+
+        <TextBox
+            x:Name="Rue"
+            Grid.Row="5" Grid.ColumnSpan="3"  Text="{Binding CurrentItem.Rue,  Mode=TwoWay}" ></TextBox>
+
+
+        <TextBox
+            x:Name="No"
+            Grid.Row="5" Grid.Column="4">
+            <TextBox.Text>
+                <Binding Path="CurrentItem.RueNum"
+                         Mode="TwoWay">
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <!-- Separateur -->
+        <Label Grid.Row="6" Height="4"/>
+
+        <TextBox
+            x:Name="Npa"
+            Grid.Row="7" Grid.Column="0">
+            <TextBox.Text>
+                <Binding Path="CurrentItem.Npa" 
+                         Mode="TwoWay">
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox
+            x:Name="Localite"
+            Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="3">
+            <TextBox.Text>
+                <Binding Path="CurrentItem.Localite" 
+                         Mode="TwoWay">
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+    </Grid>
+</UserControl>

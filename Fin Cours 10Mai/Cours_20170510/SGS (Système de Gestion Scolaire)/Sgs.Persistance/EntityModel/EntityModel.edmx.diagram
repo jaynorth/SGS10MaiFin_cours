@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="860bb4e567354b7998287917fdd2ee43" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="Sgs.Persistence.EntityModel.tbCours" Width="1.5" PointX="0.875" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Sgs.Persistence.EntityModel.tbEnseignants" Width="1.5" PointX="1.375" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Sgs.Persistence.EntityModel.tbEtudiants" Width="1.5" PointX="4.125" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Sgs.Persistence.EntityModel.tbFormations" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Sgs.Persistence.EntityModel.tbSessions" Width="1.5" PointX="7.25" PointY="2.5" IsExpanded="true" />
+        <AssociationConnector Association="Sgs.Persistence.EntityModel.FK_Sessions_Cours" ManuallyRouted="false" />
+        <AssociationConnector Association="Sgs.Persistence.EntityModel.FK_Sessions_Eseignant" ManuallyRouted="false" />
+        <AssociationConnector Association="Sgs.Persistence.EntityModel.tbCoursFormations" ManuallyRouted="false" />
+        <AssociationConnector Association="Sgs.Persistence.EntityModel.tbInscriptions" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

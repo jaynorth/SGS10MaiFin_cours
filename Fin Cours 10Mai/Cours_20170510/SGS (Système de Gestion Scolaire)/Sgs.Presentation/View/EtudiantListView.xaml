@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="Sgs.Presentation.View.EtudiantListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Sgs.Presentation.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" 
+                Margin="0,0,0,5"
+                BorderBrush="Red"
+                BorderThickness="1">
+            <Label
+                Margin="2"
+                Content="Etudiants"
+                FontSize="16"/>
+        </Border>
+
+        <!-- Tools Bar -->
+        <Border
+            Grid.Row="1"
+            Padding="2"
+            Margin="0,0,0,5"
+            BorderBrush="Red"
+            BorderThickness="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="6*" />
+                    <ColumnDefinition Width=".5*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width=".5*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="SearchBox" Grid.Column="0"></TextBox>
+                <Button Grid.Column="2" Content="-" Command="{Binding DeleteCurrent}"></Button>
+                <Button Grid.Column="4" Content="+" Command="{Binding AddNew}" ></Button>
+            </Grid>
+        </Border>
+
+        <!-- Etudiant List -->
+        <Border Grid.Row="2"
+                Padding="2"
+                BorderBrush="Red"
+                BorderThickness="1">
+            <ListView x:Name="ListViewEtudiants"
+                ItemsSource="{Binding Etudiants, Mode=OneWay}"
+                      SelectedItem="{Binding CurrentItem, Mode=TwoWay}"
+                      />
+        </Border>
+    </Grid>
+</UserControl>

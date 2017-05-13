@@ -1,0 +1,420 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Sgs.Persistence.EntityModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbCours">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Titre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="3000" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'C:\USERS\USER\DOCUMENTS\VISUAL STUDIO 2015\PROJECTS\SGS (SYSTÈME DE GESTION SCOLAIRE)\SGS.PERSISTANCE\SGS.MDF.dbo.tbCoursFormations' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="tbCoursFormations">
+          <Key>
+            <PropertyRef Name="CoursFormation_Cours" />
+            <PropertyRef Name="CoursFormation_Formations" />
+          </Key>
+          <Property Name="CoursFormation_Cours" Type="int" Nullable="false" />
+          <Property Name="CoursFormation_Formations" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbEnseignants">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nom" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prenom" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Titre" Type="nvarchar" MaxLength="50" />
+          <Property Name="Bio" Type="nvarchar" MaxLength="3000" />
+          <Property Name="Rue" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Npa" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Localité" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbEtudiants">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nom" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Prenom" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Rue" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Npa" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Localite" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbFormations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nom" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'C:\USERS\USER\DOCUMENTS\VISUAL STUDIO 2015\PROJECTS\SGS (SYSTÈME DE GESTION SCOLAIRE)\SGS.PERSISTANCE\SGS.MDF.dbo.tbInscriptions' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="tbInscriptions">
+          <Key>
+            <PropertyRef Name="Inscription_Session" />
+            <PropertyRef Name="Inscription_Etudiant" />
+          </Key>
+          <Property Name="Inscription_Session" Type="int" Nullable="false" />
+          <Property Name="Inscription_Etudiant" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbSessions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="SessionId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MaxInscription" Type="int" Nullable="false" />
+          <Property Name="AnneeAcademique" Type="int" Nullable="false" />
+          <Property Name="JoursCours" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="DateDebutCours" Type="date" Nullable="false" />
+          <Property Name="DateFinCours" Type="date" Nullable="false" />
+          <Property Name="Session_Cours" Type="int" Nullable="false" />
+          <Property Name="Session_Enseignant" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CoursFormations_Cours">
+          <End Role="tbCours" Type="Self.tbCours" Multiplicity="1" />
+          <End Role="tbCoursFormations" Type="Self.tbCoursFormations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCours">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbCoursFormations">
+              <PropertyRef Name="CoursFormation_Cours" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoursFormations_Formations">
+          <End Role="tbFormations" Type="Self.tbFormations" Multiplicity="1" />
+          <End Role="tbCoursFormations" Type="Self.tbCoursFormations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFormations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbCoursFormations">
+              <PropertyRef Name="CoursFormation_Formations" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inscriptions_Etudiants">
+          <End Role="tbEtudiants" Type="Self.tbEtudiants" Multiplicity="1" />
+          <End Role="tbInscriptions" Type="Self.tbInscriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEtudiants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbInscriptions">
+              <PropertyRef Name="Inscription_Etudiant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inscriptions_Sessions">
+          <End Role="tbSessions" Type="Self.tbSessions" Multiplicity="1" />
+          <End Role="tbInscriptions" Type="Self.tbInscriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbSessions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbInscriptions">
+              <PropertyRef Name="Inscription_Session" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sessions_Cours">
+          <End Role="tbCours" Type="Self.tbCours" Multiplicity="1" />
+          <End Role="tbSessions" Type="Self.tbSessions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCours">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbSessions">
+              <PropertyRef Name="Session_Cours" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sessions_Eseignant">
+          <End Role="tbEnseignants" Type="Self.tbEnseignants" Multiplicity="1" />
+          <End Role="tbSessions" Type="Self.tbSessions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEnseignants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbSessions">
+              <PropertyRef Name="Session_Enseignant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SgsPersistenceEntityModelStoreContainer">
+          <EntitySet Name="tbCours" EntityType="Self.tbCours" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbEnseignants" EntityType="Self.tbEnseignants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbEtudiants" EntityType="Self.tbEtudiants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbFormations" EntityType="Self.tbFormations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbSessions" EntityType="Self.tbSessions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbCoursFormations" EntityType="Self.tbCoursFormations" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tbCoursFormations].[CoursFormation_Cours] AS [CoursFormation_Cours], 
+    [tbCoursFormations].[CoursFormation_Formations] AS [CoursFormation_Formations]
+    FROM [dbo].[tbCoursFormations] AS [tbCoursFormations]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tbInscriptions" EntityType="Self.tbInscriptions" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tbInscriptions].[Inscription_Session] AS [Inscription_Session], 
+    [tbInscriptions].[Inscription_Etudiant] AS [Inscription_Etudiant]
+    FROM [dbo].[tbInscriptions] AS [tbInscriptions]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_CoursFormations_Cours" Association="Self.FK_CoursFormations_Cours">
+            <End Role="tbCours" EntitySet="tbCours" />
+            <End Role="tbCoursFormations" EntitySet="tbCoursFormations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoursFormations_Formations" Association="Self.FK_CoursFormations_Formations">
+            <End Role="tbFormations" EntitySet="tbFormations" />
+            <End Role="tbCoursFormations" EntitySet="tbCoursFormations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inscriptions_Etudiants" Association="Self.FK_Inscriptions_Etudiants">
+            <End Role="tbEtudiants" EntitySet="tbEtudiants" />
+            <End Role="tbInscriptions" EntitySet="tbInscriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inscriptions_Sessions" Association="Self.FK_Inscriptions_Sessions">
+            <End Role="tbSessions" EntitySet="tbSessions" />
+            <End Role="tbInscriptions" EntitySet="tbInscriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sessions_Cours" Association="Self.FK_Sessions_Cours">
+            <End Role="tbCours" EntitySet="tbCours" />
+            <End Role="tbSessions" EntitySet="tbSessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sessions_Eseignant" Association="Self.FK_Sessions_Eseignant">
+            <End Role="tbEnseignants" EntitySet="tbEnseignants" />
+            <End Role="tbSessions" EntitySet="tbSessions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Sgs.Persistence.EntityModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbCours">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Titre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbSessions" Relationship="Self.FK_Sessions_Cours" FromRole="tbCours" ToRole="tbSessions" />
+          <NavigationProperty Name="tbFormations" Relationship="Self.tbCoursFormations" FromRole="tbCours" ToRole="tbFormations" />
+        </EntityType>
+        <EntityType Name="tbEnseignants">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Titre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Bio" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Name="Rue" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Npa" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Localité" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tbSessions" Relationship="Self.FK_Sessions_Eseignant" FromRole="tbEnseignants" ToRole="tbSessions" />
+        </EntityType>
+        <EntityType Name="tbEtudiants">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Prenom" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Rue" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Npa" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Localite" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tbSessions" Relationship="Self.tbInscriptions" FromRole="tbEtudiants" ToRole="tbSessions" />
+        </EntityType>
+        <EntityType Name="tbFormations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tbCours" Relationship="Self.tbCoursFormations" FromRole="tbFormations" ToRole="tbCours" />
+        </EntityType>
+        <EntityType Name="tbSessions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="SessionId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaxInscription" Type="Int32" Nullable="false" />
+          <Property Name="AnneeAcademique" Type="Int32" Nullable="false" />
+          <Property Name="JoursCours" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateDebutCours" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DateFinCours" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Session_Cours" Type="Int32" Nullable="false" />
+          <Property Name="Session_Enseignant" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbCours" Relationship="Self.FK_Sessions_Cours" FromRole="tbSessions" ToRole="tbCours" />
+          <NavigationProperty Name="tbEnseignants" Relationship="Self.FK_Sessions_Eseignant" FromRole="tbSessions" ToRole="tbEnseignants" />
+          <NavigationProperty Name="tbEtudiants" Relationship="Self.tbInscriptions" FromRole="tbSessions" ToRole="tbEtudiants" />
+        </EntityType>
+        <Association Name="FK_Sessions_Cours">
+          <End Role="tbCours" Type="Self.tbCours" Multiplicity="1" />
+          <End Role="tbSessions" Type="Self.tbSessions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCours">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbSessions">
+              <PropertyRef Name="Session_Cours" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sessions_Eseignant">
+          <End Role="tbEnseignants" Type="Self.tbEnseignants" Multiplicity="1" />
+          <End Role="tbSessions" Type="Self.tbSessions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEnseignants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbSessions">
+              <PropertyRef Name="Session_Enseignant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tbCoursFormations">
+          <End Role="tbCours" Type="Self.tbCours" Multiplicity="*" />
+          <End Role="tbFormations" Type="Self.tbFormations" Multiplicity="*" />
+        </Association>
+        <Association Name="tbInscriptions">
+          <End Role="tbEtudiants" Type="Self.tbEtudiants" Multiplicity="*" />
+          <End Role="tbSessions" Type="Self.tbSessions" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="EntityModelConnexion" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbCours" EntityType="Self.tbCours" />
+          <EntitySet Name="tbEnseignants" EntityType="Self.tbEnseignants" />
+          <EntitySet Name="tbEtudiants" EntityType="Self.tbEtudiants" />
+          <EntitySet Name="tbFormations" EntityType="Self.tbFormations" />
+          <EntitySet Name="tbSessions" EntityType="Self.tbSessions" />
+          <AssociationSet Name="FK_Sessions_Cours" Association="Self.FK_Sessions_Cours">
+            <End Role="tbCours" EntitySet="tbCours" />
+            <End Role="tbSessions" EntitySet="tbSessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sessions_Eseignant" Association="Self.FK_Sessions_Eseignant">
+            <End Role="tbEnseignants" EntitySet="tbEnseignants" />
+            <End Role="tbSessions" EntitySet="tbSessions" />
+          </AssociationSet>
+          <AssociationSet Name="tbCoursFormations" Association="Self.tbCoursFormations">
+            <End Role="tbCours" EntitySet="tbCours" />
+            <End Role="tbFormations" EntitySet="tbFormations" />
+          </AssociationSet>
+          <AssociationSet Name="tbInscriptions" Association="Self.tbInscriptions">
+            <End Role="tbEtudiants" EntitySet="tbEtudiants" />
+            <End Role="tbSessions" EntitySet="tbSessions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SgsPersistenceEntityModelStoreContainer" CdmEntityContainer="EntityModelConnexion">
+          <EntitySetMapping Name="tbCours">
+            <EntityTypeMapping TypeName="Sgs.Persistence.EntityModel.tbCours">
+              <MappingFragment StoreEntitySet="tbCours">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Titre" ColumnName="Titre" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbEnseignants">
+            <EntityTypeMapping TypeName="Sgs.Persistence.EntityModel.tbEnseignants">
+              <MappingFragment StoreEntitySet="tbEnseignants">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Titre" ColumnName="Titre" />
+                <ScalarProperty Name="Bio" ColumnName="Bio" />
+                <ScalarProperty Name="Rue" ColumnName="Rue" />
+                <ScalarProperty Name="Npa" ColumnName="Npa" />
+                <ScalarProperty Name="Localité" ColumnName="Localité" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbEtudiants">
+            <EntityTypeMapping TypeName="Sgs.Persistence.EntityModel.tbEtudiants">
+              <MappingFragment StoreEntitySet="tbEtudiants">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Rue" ColumnName="Rue" />
+                <ScalarProperty Name="Npa" ColumnName="Npa" />
+                <ScalarProperty Name="Localite" ColumnName="Localite" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbFormations">
+            <EntityTypeMapping TypeName="Sgs.Persistence.EntityModel.tbFormations">
+              <MappingFragment StoreEntitySet="tbFormations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbSessions">
+            <EntityTypeMapping TypeName="Sgs.Persistence.EntityModel.tbSessions">
+              <MappingFragment StoreEntitySet="tbSessions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+                <ScalarProperty Name="MaxInscription" ColumnName="MaxInscription" />
+                <ScalarProperty Name="AnneeAcademique" ColumnName="AnneeAcademique" />
+                <ScalarProperty Name="JoursCours" ColumnName="JoursCours" />
+                <ScalarProperty Name="DateDebutCours" ColumnName="DateDebutCours" />
+                <ScalarProperty Name="DateFinCours" ColumnName="DateFinCours" />
+                <ScalarProperty Name="Session_Cours" ColumnName="Session_Cours" />
+                <ScalarProperty Name="Session_Enseignant" ColumnName="Session_Enseignant" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="tbCoursFormations" TypeName="Sgs.Persistence.EntityModel.tbCoursFormations" StoreEntitySet="tbCoursFormations">
+            <EndProperty Name="tbCours">
+              <ScalarProperty Name="Id" ColumnName="CoursFormation_Cours" />
+            </EndProperty>
+            <EndProperty Name="tbFormations">
+              <ScalarProperty Name="Id" ColumnName="CoursFormation_Formations" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="tbInscriptions" TypeName="Sgs.Persistence.EntityModel.tbInscriptions" StoreEntitySet="tbInscriptions">
+            <EndProperty Name="tbEtudiants">
+              <ScalarProperty Name="Id" ColumnName="Inscription_Etudiant" />
+            </EndProperty>
+            <EndProperty Name="tbSessions">
+              <ScalarProperty Name="Id" ColumnName="Inscription_Session" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
