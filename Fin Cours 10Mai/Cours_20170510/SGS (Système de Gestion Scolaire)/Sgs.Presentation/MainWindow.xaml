@@ -43,10 +43,10 @@
             <!--Zone Etudiants list View-->
             <Border Grid.Column="0" Width="170"  Style="{StaticResource MainBorderStyle}">
                 <ContentControl>
-                    <views:EtudiantListView x:Name="EtudiantsList" >
+                    <views:EnseignantListView x:Name="EnseignantsList" >
                    
                         
-                    </views:EtudiantListView>
+                    </views:EnseignantListView>
                 </ContentControl>
             </Border>
 

@@ -20,7 +20,7 @@
                 BorderThickness="1">
             <Label
                 Margin="2"
-                Content="Etudiants"
+                Content="Enseignants"
                 FontSize="16"/>
         </Border>
 
@@ -52,7 +52,7 @@
                 BorderBrush="Red"
                 BorderThickness="1">
             <ListView x:Name="ListViewEtudiants"
-                ItemsSource="{Binding Etudiants, Mode=OneWay}"
+                ItemsSource="{Binding Enseignants, Mode=OneWay}"
                       SelectedItem="{Binding CurrentItem, Mode=TwoWay}"
                       />
         </Border>

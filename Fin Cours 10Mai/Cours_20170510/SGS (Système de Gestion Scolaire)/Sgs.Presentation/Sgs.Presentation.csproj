@@ -85,6 +85,7 @@
     </ApplicationDefinition>
     <Compile Include="Helpers\BaseViewModel.cs" />
     <Compile Include="Helpers\ExecutableCommand.cs" />
+    <Compile Include="ViewModel\EnseignantListViewModel.cs" />
     <Compile Include="ViewModel\EtudiantListViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />

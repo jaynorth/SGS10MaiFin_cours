@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sgs.Presentation.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace Sgs.Presentation.View
         public EnseignantListView()
         {
             InitializeComponent();
+          //  DataContext = new EnseignantListViewModel();
         }
     }
 }

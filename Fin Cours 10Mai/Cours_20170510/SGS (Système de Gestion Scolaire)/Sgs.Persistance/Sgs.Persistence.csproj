@@ -96,6 +96,7 @@
     <Compile Include="EntityModel\tbEnseignants.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModel\tbEnseignantsAddons.cs" />
     <Compile Include="EntityModel\tbEtudiants.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>

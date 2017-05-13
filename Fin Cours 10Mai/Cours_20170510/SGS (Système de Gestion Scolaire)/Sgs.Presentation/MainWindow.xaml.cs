@@ -25,7 +25,7 @@ namespace Sgs.Presentation
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new EtudiantListViewModel();
+            DataContext = new EnseignantListViewModel();
            // EtudiantDetail.DataContext = EtudiantsList.ListViewEtudiants; //extrait du Datacontext principal
         }
 
